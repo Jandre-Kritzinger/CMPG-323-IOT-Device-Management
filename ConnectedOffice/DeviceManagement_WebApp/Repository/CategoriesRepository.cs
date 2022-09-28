@@ -6,7 +6,10 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System;
+<<<<<<< HEAD
 using DeviceManagement_WebApp.Controllers;
+=======
+>>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
 
 namespace DeviceManagement_WebApp.Repository
 {
@@ -23,10 +26,15 @@ namespace DeviceManagement_WebApp.Repository
         // GET: Categories by ID
         public async Task<Category> Details(Guid? id)
         {
+<<<<<<< HEAD
+=======
+
+>>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
             var category = await _context.Category.FirstOrDefaultAsync(m => m.CategoryId == id);
 
             return (category);
         }
+<<<<<<< HEAD
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async void Create(Category category)
@@ -47,5 +55,7 @@ namespace DeviceManagement_WebApp.Repository
             _context.Remove(category);
             await _context.SaveChangesAsync();
         }
+=======
+>>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
     }
 }

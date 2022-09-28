@@ -16,6 +16,12 @@ namespace DeviceManagement_WebApp.Controllers
     public class CategoriesController : Controller
     {
         private readonly ConnectedOfficeContext _context;
+<<<<<<< HEAD
+=======
+
+        private CategoriesRepository _categoryRepository = new CategoriesRepository();
+
+>>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
         public CategoriesController(ConnectedOfficeContext context)
         {
             _context = context;
@@ -28,6 +34,11 @@ namespace DeviceManagement_WebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var categories = _categoryRepository.GetAll();
+<<<<<<< HEAD
+=======
+
+            
+>>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
             return View(categories);
         } 
 
