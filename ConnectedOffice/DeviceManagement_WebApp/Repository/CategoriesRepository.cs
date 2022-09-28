@@ -6,10 +6,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System;
-<<<<<<< HEAD
 using DeviceManagement_WebApp.Controllers;
-=======
->>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DeviceManagement_WebApp.Repository
 {
@@ -23,18 +21,15 @@ namespace DeviceManagement_WebApp.Repository
             return _context.Category.ToList();
         }
 
-        // GET: Categories by ID
+        // GET: Specific Category by ID
         public async Task<Category> Details(Guid? id)
         {
-<<<<<<< HEAD
-=======
-
->>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
             var category = await _context.Category.FirstOrDefaultAsync(m => m.CategoryId == id);
 
             return (category);
         }
-<<<<<<< HEAD
+
+        //Create new Category
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async void Create(Category category)
@@ -44,18 +39,30 @@ namespace DeviceManagement_WebApp.Repository
             await _context.SaveChangesAsync();
         }
 
+        //Update Category
         public async void Update(Category category)
         {
             _context.Entry(category).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
+        //Delete Category
         public async void Delete(Category category)
         {
             _context.Remove(category);
             await _context.SaveChangesAsync();
         }
-=======
->>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
+
+        //Does Category exist?
+        public bool CategoryExists(Guid id)
+        {
+            return _context.Category.Any(e => e.CategoryId == id);
+        }
+
+        public SelectList GetList()
+        {
+            SelectList list = new SelectList(_context.Category, "CategoryId", "CategoryName");
+            return list;
+        }
     }
 }

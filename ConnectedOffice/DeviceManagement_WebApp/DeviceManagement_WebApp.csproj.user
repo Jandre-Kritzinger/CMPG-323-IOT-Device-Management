@@ -15,5 +15,6 @@
     <WebStackScaffolding_DbContextTypeFullName>DeviceManagement_WebApp.Data.ConnectedOfficeContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>C:\Users\Jandre\Projects\Project-3\.github\workflows\jakritzingerproject3.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

@@ -15,30 +15,13 @@ namespace DeviceManagement_WebApp.Controllers
     [Authorize]
     public class CategoriesController : Controller
     {
-        private readonly ConnectedOfficeContext _context;
-<<<<<<< HEAD
-=======
 
         private CategoriesRepository _categoryRepository = new CategoriesRepository();
-
->>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
-        public CategoriesController(ConnectedOfficeContext context)
-        {
-            _context = context;
-        }
-        private CategoriesRepository _categoryRepository = new CategoriesRepository();
-
-       
 
         // GET: Categories
         public async Task<IActionResult> Index()
         {
             var categories = _categoryRepository.GetAll();
-<<<<<<< HEAD
-=======
-
-            
->>>>>>> cf4a389010ff91ab7909ce6914ce09d1418e1d83
             return View(categories);
         } 
 
@@ -66,8 +49,6 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
         // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Category category)
@@ -85,7 +66,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category.FindAsync(id);
+            var category = await _categoryRepository.Details(id);
             if (category == null)
             {
                 return NotFound();
@@ -94,8 +75,6 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
         // POST: Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Category category)
@@ -152,7 +131,7 @@ namespace DeviceManagement_WebApp.Controllers
 
         private bool CategoryExists(Guid id)
         {
-            return _context.Category.Any(e => e.CategoryId == id);
+            return _categoryRepository.CategoryExists(id);
         }
     }
 }
