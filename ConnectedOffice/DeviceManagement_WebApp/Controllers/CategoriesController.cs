@@ -16,20 +16,18 @@ namespace DeviceManagement_WebApp.Controllers
     public class CategoriesController : Controller
     {
         private readonly ConnectedOfficeContext _context;
-
-        private CategoriesRepository _categoryRepository = new CategoriesRepository();
-
         public CategoriesController(ConnectedOfficeContext context)
         {
             _context = context;
         }
+        private CategoriesRepository _categoryRepository = new CategoriesRepository();
+
+       
 
         // GET: Categories
         public async Task<IActionResult> Index()
         {
             var categories = _categoryRepository.GetAll();
-
-            
             return View(categories);
         } 
 
@@ -41,8 +39,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _categoryRepository.Details(id);
             if (category == null)
             {
                 return NotFound();
@@ -65,8 +62,7 @@ namespace DeviceManagement_WebApp.Controllers
         public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Category category)
         {
             category.CategoryId = Guid.NewGuid();
-            _context.Add(category);
-            await _context.SaveChangesAsync();
+            _categoryRepository.Create(category);
             return RedirectToAction(nameof(Index));
         }
 
@@ -99,8 +95,7 @@ namespace DeviceManagement_WebApp.Controllers
             }
             try
             {
-                _context.Update(category);
-                await _context.SaveChangesAsync();
+                _categoryRepository.Update(category);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -124,8 +119,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _categoryRepository.Details(id);
             if (category == null)
             {
                 return NotFound();
@@ -139,9 +133,9 @@ namespace DeviceManagement_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var category = await _context.Category.FindAsync(id);
-            _context.Category.Remove(category);
-            await _context.SaveChangesAsync();
+            var category = await _categoryRepository.Details(id);
+            _categoryRepository.Delete(category);
+            
             return RedirectToAction(nameof(Index));
         }
 
